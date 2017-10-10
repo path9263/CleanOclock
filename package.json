@@ -1,0 +1,94 @@
+{
+    "author": "liam2317@gmail.com",
+    "dependencies": {},
+    "keywords": [],
+    "name": "cleanoclock",
+    "pebble": {
+        "capabilities": [
+            "configurable"
+        ],
+        "displayName": "CleanOclock",
+        "enableMultiJS": false,
+        "messageKeys": [
+            "BATTLVL",
+            "BATTSTATS"
+        ],
+        "projectType": "native",
+        "resources": {
+            "media": [
+                {
+                    "file": "images/plugIcon.png",
+                    "memoryFormat": "SmallestPalette",
+                    "name": "IMAGE_PLUG_ICON",
+                    "storageFormat": "png",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/watchIcon.png",
+                    "memoryFormat": "SmallestPalette",
+                    "name": "IMAGE_WATCH_ICON",
+                    "storageFormat": "png",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/phoneIcon.png",
+                    "memoryFormat": "SmallestPalette",
+                    "name": "IMAGE_PHONE_ICON",
+                    "storageFormat": "png",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "characterRegex": "[0-9 ]",
+                    "file": "fonts/Montserrat.ttf",
+                    "name": "MONTSERRAT_BOLD_68",
+                    "targetPlatforms": null,
+                    "trackingAdjust": 1,
+                    "type": "font"
+                },
+                {
+                    "file": "images/battIcon.png",
+                    "memoryFormat": "SmallestPalette",
+                    "name": "IMAGE_BATT_ICON",
+                    "storageFormat": "png",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/btIcon.png",
+                    "memoryFormat": "SmallestPalette",
+                    "name": "IMAGE_BT_ICON",
+                    "storageFormat": "png",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/quietIcon.png",
+                    "memoryFormat": "SmallestPalette",
+                    "name": "IMAGE_QUIET_ICON",
+                    "storageFormat": "png",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "characterRegex": "[0-9 ]",
+                    "file": "fonts/consolas.ttf",
+                    "name": "CONSOLAS_BOLD_70",
+                    "targetPlatforms": null,
+                    "type": "font"
+                }
+            ]
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "basalt"
+        ],
+        "uuid": "42090554-b023-4789-b397-3ee8ad33a573",
+        "watchapp": {
+            "watchface": true
+        }
+    },
+    "version": "1.0.0"
+}
