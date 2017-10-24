@@ -1,0 +1,5 @@
+
+
+#bootstrap-overrides .navbar-brand { /* 100+1=101 priority score, yay! */
+	font-size: 1.75rem;
+}
