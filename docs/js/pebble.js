@@ -9,7 +9,7 @@
     //var foregroundColor = document.getElementById('foreground_color_input');
     //var secondTickCheckbox = document.getElementById('second_tick_checkbox');
     //var animationsCheckbox = document.getElementById('animations_checkbox');
-	var vibeInterval = ('input[name="interval_time"]:checked').val();
+	var vibeInterval = $('input[name="interval_time"]:checked').val();
 
     // Make a data object to be sent, coercing value types to integers
     var options = {
