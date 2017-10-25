@@ -1,5 +1,5 @@
 {
-    "author": "liam2317@gmail.com",
+    "author": "Orthographic",
     "dependencies": {},
     "keywords": [],
     "name": "cleanoclock",
@@ -11,11 +11,28 @@
         "enableMultiJS": false,
         "messageKeys": [
             "BATTLVL",
-            "BATTSTATS"
+            "BATTSTATS",
+            "BGCOLOR",
+            "VIBEINTERVAL"
         ],
         "projectType": "native",
         "resources": {
             "media": [
+                {
+                    "characterRegex": "[0-9 ]",
+                    "file": "fonts/square.ttf",
+                    "name": "FORCED_SQUARE_94",
+                    "targetPlatforms": null,
+                    "type": "font"
+                },
+                {
+                    "file": "images/logo.png",
+                    "memoryFormat": "SmallestPalette",
+                    "menuIcon": true,
+                    "name": "IMAGE_MENU_ICON",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
                 {
                     "file": "images/plugIcon.png",
                     "memoryFormat": "SmallestPalette",

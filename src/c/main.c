@@ -1,5 +1,7 @@
 #include <pebble.h>
 
+#define SETTINGS_KEY 1
+
 static Window *s_main_window;
 static Layer *s_canvas_layer;
 static TextLayer *s_time_h_layer;
@@ -8,6 +10,7 @@ static TextLayer *s_date_layer;
 static TextLayer *s_battery_layer;
 static GFont s_font_consolas;
 static GFont s_font_montserrat;
+static GFont s_font_square;
 
 static int s_watch_battery_level;
 static int s_phone_battery_level;
@@ -22,6 +25,45 @@ static GBitmap *s_phone_icon_bitmap;
 static GBitmap *s_watch_icon_bitmap;
 static GBitmap *s_plug_icon_bitmap;
 
+static GColor bg_color;
+
+static const VibePattern vibeLowBatt = {
+  .durations = (uint32_t[]) {100, 200, 200, 200, 400}, // on, off, on, off, etc... in ms)
+  .num_segments = 5
+};
+
+static const VibePattern vibeBT = {
+  .durations = (uint32_t[]) {100, 100, 100, 100, 300, 200, 300, 200, 100, 100, 100}, // on, off, on, off, etc... in ms)
+  .num_segments = 11
+};
+
+// A structure containing our saved settings
+typedef struct SavedSettings {
+  GColor BackgroundColor;
+  int vibeInterval;
+} __attribute__((__packed__)) SavedSettings;
+
+// An instance of the struct
+static SavedSettings settings;
+
+static void prv_default_settings() {
+  settings.BackgroundColor = GColorWhite;
+  settings.vibeInterval = 0;
+}
+
+// Read settings from persistent storage
+static void prv_load_settings() {
+  // Load the default settings
+  prv_default_settings();
+  // Read settings from persistent storage, if they exist
+  persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
+}
+// Save the settings to persistent storage
+static void prv_save_settings() {
+  persist_write_data(SETTINGS_KEY, &settings, sizeof(settings));
+  // Update the display based on new settings
+  //prv_update_display();
+}
 
 static void update_time() {
   // Get a tm structure
@@ -98,7 +140,7 @@ static void canvas_update_proc(Layer *layer, GContext *ctx) {
   
   // Draw bg rectangle
   GRect bg_rect_bounds = GRect(0, 0, bounds.size.w, 126);
-  graphics_context_set_fill_color(ctx, GColorWhite);
+  graphics_context_set_fill_color(ctx, settings.BackgroundColor);//GColorFromHEX(4359924));//
   graphics_context_set_stroke_color(ctx, GColorClear);
   graphics_context_set_stroke_width(ctx, 0);
   graphics_fill_rect(ctx, bg_rect_bounds, 0, GCornersAll);
@@ -194,15 +236,25 @@ static void canvas_update_proc(Layer *layer, GContext *ctx) {
 }
 
 static void bluetooth_callback(bool connected) {
+  static int btState = 1;
   if(!connected) { // not connected
     // update the background color
     layer_mark_dirty(s_canvas_layer);
     // Issue a vibrating alert
-    vibes_double_pulse();
+    vibes_enqueue_custom_pattern(vibeBT);
+    btState = 0;
   } 
+  if(connected && !btState) {
+    vibes_double_pulse();
+    btState = 1;
+    layer_mark_dirty(s_canvas_layer);
+  }
 }
 
 static void main_window_load(Window *window) {
+  
+  // load saved settings
+  prv_load_settings();
   
   // Get information about the Window
   Layer *window_layer = window_get_root_layer(window);
@@ -219,20 +271,25 @@ static void main_window_load(Window *window) {
   s_batt_icon_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BATT_ICON);
   
   // draw bg:
+  bg_color = GColorWhite;
   layer_set_update_proc(s_canvas_layer, canvas_update_proc);
   // Add to Window
   layer_add_child(window_get_root_layer(window), s_canvas_layer);
 
   // Create the TextLayer with specific bounds
   s_time_h_layer = text_layer_create(
-      GRect(0, -11, bounds.size.w, 85));
+      //GRect(0, -11, bounds.size.w, 85)); //MONTSERRAT_BOLD_68
+      GRect(5, -36, bounds.size.w, 100)); // x,y,w,h
+
   s_time_m_layer = text_layer_create(
-      GRect(0, 47, bounds.size.w, 85));
+      //GRect(0, 47, bounds.size.w, 85)); //MONTSERRAT_BOLD_68
+      GRect(5, 23, bounds.size.w, 100)); // x,y,w,h
+
   
     // Load the custom font
   //s_font_consolas = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_CONSOLAS_BOLD_70));
-  s_font_montserrat = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_MONTSERRAT_BOLD_68));
-  //MONTSERRAT_BOLD_73
+  //s_font_montserrat = fonts_load_custom_font(resource_get_handle(MONTSERRAT_BOLD_68)); //MONTSERRAT_BOLD_68
+  s_font_square = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FORCED_SQUARE_94)); //FORCED_SQUARE_94
   
   // custom drawing procedure, background rect
   layer_set_update_proc(s_canvas_layer, canvas_update_proc);
@@ -242,14 +299,14 @@ static void main_window_load(Window *window) {
   text_layer_set_background_color(s_time_h_layer, GColorClear);
   text_layer_set_text_color(s_time_h_layer, GColorBlack);
   text_layer_set_text(s_time_h_layer, "00\n00");
-  text_layer_set_font(s_time_h_layer, s_font_montserrat);
+  text_layer_set_font(s_time_h_layer, s_font_square);
   text_layer_set_text_alignment(s_time_h_layer, GTextAlignmentCenter);
   
   // minute text layer format
   text_layer_set_background_color(s_time_m_layer, GColorClear);
   text_layer_set_text_color(s_time_m_layer, GColorBlack);
   text_layer_set_text(s_time_m_layer, "00\n00");
-  text_layer_set_font(s_time_m_layer, s_font_montserrat);
+  text_layer_set_font(s_time_m_layer, s_font_square);
   text_layer_set_text_alignment(s_time_m_layer, GTextAlignmentCenter);
 
   // Add time text layers to window layer
@@ -278,7 +335,7 @@ static void main_window_load(Window *window) {
   text_layer_set_text_color(s_date_layer, GColorWhite);
   text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);
   text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
-  text_layer_set_text(s_date_layer, "SAT\n15");
+  text_layer_set_text(s_date_layer, "--\n--");
   // add layer to window
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
   
@@ -298,6 +355,7 @@ static void main_window_unload(Window *window) {
   // Unload GFont
   fonts_unload_custom_font(s_font_consolas);
   fonts_unload_custom_font(s_font_montserrat);
+  fonts_unload_custom_font(s_font_square);
   
   gbitmap_destroy(s_quiet_icon_bitmap);
   gbitmap_destroy(s_bt_icon_bitmap);
@@ -326,6 +384,20 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   Tuple *battlvl_tuple = dict_find(iterator, MESSAGE_KEY_BATTLVL);
   Tuple *battStats_tuple = dict_find(iterator, MESSAGE_KEY_BATTSTATS);
   
+  Tuple *bg_color_tuple = dict_find(iterator, MESSAGE_KEY_BGCOLOR);
+  Tuple *vibeInterval_tuple = dict_find(iterator, MESSAGE_KEY_VIBEINTERVAL);
+  
+  if(bg_color_tuple && vibeInterval_tuple) {
+    APP_LOG(APP_LOG_LEVEL_INFO, "Vibe Interval: %d", vibeInterval_tuple->value->int32);
+    bg_color = GColorFromHEX(bg_color_tuple->value->int32);
+    
+    settings.BackgroundColor = GColorFromHEX(bg_color_tuple->value->int32);
+    settings.vibeInterval = vibeInterval_tuple->value->int8;
+    
+    layer_mark_dirty(s_canvas_layer);
+    prv_save_settings();
+  }
+  
   if(battlvl_tuple && battStats_tuple) {
     s_phone_battery_level = (int)battlvl_tuple->value->int32;
     s_phone_battery_status = (int)battStats_tuple->value->int8;
@@ -335,10 +407,12 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     if(s_phone_battery_level == 20 || s_phone_battery_level == 10){
       // Issue a vibrating alert
       if(!s_phone_battery_status){ // if not charging 
-        vibes_double_pulse();
+         vibes_enqueue_custom_pattern(vibeLowBatt);
+        //vibes_double_pulse();
       }
     }
-  } else {  APP_LOG(APP_LOG_LEVEL_ERROR, "All data is not available!"); }
+  } else {  //APP_LOG(APP_LOG_LEVEL_ERROR, "All data is not available!"); }
+    }
 }
 static void inbox_dropped_callback(AppMessageResult reason, void *context) {
   APP_LOG(APP_LOG_LEVEL_ERROR, "Message dropped!");
