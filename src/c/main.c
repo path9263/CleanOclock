@@ -123,6 +123,10 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   if( (units_changed & DAY_UNIT) != 0 ) {
        update_date(); 
   }
+  // periodic vibration
+  if((tick_time->tm_min % settings.vibeInterval == 0) && !quiet_time_is_active()) {
+      vibes_short_pulse();
+  }
   
 }
 
