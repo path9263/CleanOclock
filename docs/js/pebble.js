@@ -12,7 +12,7 @@
 
     // Make a data object to be sent, coercing value types to integers
     var options = {
-      'background_color': parseInt('4286f4', 16)
+      'background_color': parseInt(backgroundColor.value, 16) //parseInt('4286f4', 16)
       //'foreground_color': parseInt(foregroundColor.value, 16),
       //'second_ticks': secondTickCheckbox.checked == 'true' ? 1 : 0,
       //'animations': animationsCheckbox.checked == 'true' ? 1 : 0
