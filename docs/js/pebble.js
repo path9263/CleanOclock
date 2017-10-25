@@ -5,6 +5,7 @@
   submitButton.addEventListener('click', function() {
     // Get the config data from the UI elements
     var backgroundColor = document.getElementById('background_color_input');
+	backgroundColor.value = backgroundColor.value.replace('#','');
     //var foregroundColor = document.getElementById('foreground_color_input');
     //var secondTickCheckbox = document.getElementById('second_tick_checkbox');
     //var animationsCheckbox = document.getElementById('animations_checkbox');
