@@ -9,10 +9,12 @@
     //var foregroundColor = document.getElementById('foreground_color_input');
     //var secondTickCheckbox = document.getElementById('second_tick_checkbox');
     //var animationsCheckbox = document.getElementById('animations_checkbox');
+	var vibeInterval = ('input[name="interval_time"]:checked').val();
 
     // Make a data object to be sent, coercing value types to integers
     var options = {
-      'background_color': parseInt(backgroundColor.value, 16) //parseInt('4286f4', 16)
+      'background_color': parseInt(backgroundColor.value, 16), //parseInt('4286f4', 16),
+	  'vibe_interval': parseInt(vibeInterval)
       //'foreground_color': parseInt(foregroundColor.value, 16),
       //'second_ticks': secondTickCheckbox.checked == 'true' ? 1 : 0,
       //'animations': animationsCheckbox.checked == 'true' ? 1 : 0
