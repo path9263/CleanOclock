@@ -1,4 +1,4 @@
-// More info here: https://googlechrome.github.io/samples/battery-status/
+// More info here on JS battery info: https://googlechrome.github.io/samples/battery-status/
 /*jshint esversion: 6 */
 
 

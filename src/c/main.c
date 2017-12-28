@@ -15,6 +15,7 @@ static GFont s_font_square;
 static int s_watch_battery_level;
 static int s_phone_battery_level;
 static int s_phone_battery_status;
+static int s_last_vibe;
 
 static BitmapLayer *s_icons_layer;
 static GBitmap *s_quiet_icon_bitmap;
@@ -124,9 +125,13 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
        update_date(); 
   }
   // periodic vibration
-  if((tick_time->tm_min % settings.vibeInterval == 0) && !quiet_time_is_active()) {
+  //if((tick_time->tm_min % settings.vibeInterval == 0) && !quiet_time_is_active()) {
+  if((tick_time->tm_min % 5 == 0) && !quiet_time_is_active()) {
+    if(tick_time->tm_min != s_last_vibe){   //fixes multiple vibrations during intended minute
       vibes_short_pulse();
+    }
   }
+  s_last_vibe = tick_time->tm_min;
   
 }
 
