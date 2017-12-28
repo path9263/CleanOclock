@@ -241,14 +241,14 @@ static void canvas_update_proc(Layer *layer, GContext *ctx) {
 
 static void bluetooth_callback(bool connected) {
   static int btState = 1;
-  if(!connected) { // not connected
+  if(!connected && !quiet_time_is_active()) { // not connected
     // update the background color
     layer_mark_dirty(s_canvas_layer);
     // Issue a vibrating alert
     vibes_enqueue_custom_pattern(vibeBT);
     btState = 0;
   } 
-  if(connected && !btState) {
+  if(connected && !btState && !quiet_time_is_active()) {
     vibes_double_pulse();
     btState = 1;
     layer_mark_dirty(s_canvas_layer);
@@ -410,7 +410,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     update_battery();
     if(s_phone_battery_level == 20 || s_phone_battery_level == 10){
       // Issue a vibrating alert
-      if(!s_phone_battery_status){ // if not charging 
+      if(!s_phone_battery_status && !quiet_time_is_active()){ // if not charging 
          vibes_enqueue_custom_pattern(vibeLowBatt);
         //vibes_double_pulse();
       }
