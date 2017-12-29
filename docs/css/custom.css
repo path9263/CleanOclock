@@ -9,10 +9,8 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: .9rem;
 }
 
-.slider.slider-horizontal{
-  width:95%; 
-}
-
+  .bootstrap-switch.bootstrap-switch-focused {
+    box-shadow: 0 0 0 2px rgba(153, 153, 153, 0.5); }
 
 /* Check box toggle switch:  */
 /* from here: https://codepen.io/anon/pen/JrQVgE */

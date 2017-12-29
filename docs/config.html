@@ -9,29 +9,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="css/bootstrap-switch.css" >
-	<link rel="stylesheet" href="css/bootstrap-slider.css" >
 	
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDofr4sDqg2Xvp5UMOK6bpvec5GbLm9EP0&libraries=places"></script>
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/jqColorPicker.min.js"></script>
 	<script src="js/index.js"></script>
 	
 	<script src="js/bootstrap-switch.js"></script>
-	<script src="js/bootstrap-slider.js"></script>
+	<script src="js/jquery.geocomplete.js"></script>
 	
 	<script>
 	$(window).on('load', function(){
-		$("[type='checkbox']").bootstrapSwitch();
-		
-		$("#ex15").slider({
-			ticks: [1, 2, 5, 10, 15, 30, 60],
-			ticks_positions: [0, 10, 20, 30, 40, 65, 100],
-			ticks_labels: [1, 2, 5, 10, 15, 30, 60],
-			ticks_snap_bounds: 5
-		});
-		$("#ex15").on("slide", function(slideEvt) {
-			$("#ex6SliderVal").text(slideEvt.value);
-		});
-		
+		$("[type='checkbox']").bootstrapSwitch();		
 	});
 
 	</script>
@@ -52,7 +41,7 @@
 	</nav>
 	<div class="container mt-3">
 		<h3>Configuration</h3>
-		<p class="lead">Basic grid layouts to get you familiar with building within the Bootstrap grid system. Test Num 4.</p>
+		<p class="lead">Use this page to setup CleanOClock.</p>
 		<h2>Colors</h2>
 			<div class="form-group row">
 				<label for="background_color_input" class="col-sm-2 col-form-label">Clock Background Color</label>
@@ -107,38 +96,52 @@
 				  </label>
 			</div>
 		<h2>Weather</h2>
-			<div class="form-group row">
-				<label for="location" class="col-sm-2 col-form-label">Your Location</label>
-				<div class="col-sm-10">
-				  <input id='location' type='text' value='Vancouver, BC' class='form-control'>
+			
+			<div class="form-row align-items-center mb-3">
+				<div class="col">
+					  <input type="text" class="form-control form-control-sm" id="wAPIkey" placeholder="API Key">
+				  
 				</div>
 			</div>
+		
+			  
+			<div class="input-group">
+				<input type="text" class="form-control form-control-sm" id="geocomplete" placeholder="Type in a location">
+				<span class="input-group-btn">
+					<input id="find" type="button" value="find" class="btn btn-secondary btn-sm"/>
+				</span> 
+			</div>
+			  
+			  <form>
+					<input name="lat" type="text" value="" class="form-control" readonly>
 
-			<p>Temperature Units</p>
+					<input name="lng" type="text" value="" class="form-control" readonly>
+				</form>
+			<h4>Temperature Units</h4>
 			<div class="btn-group" data-toggle="buttons">
-				  <label class="btn btn-secondary active">
+				  <label class="btn btn-secondary active btn-sm">
 					<input type="radio" name="options" id="celsius" autocomplete="off" checked> Celsius
 				  </label>
-				  <label class="btn btn-secondary">
+				  <label class="btn btn-secondary btn-sm">
 					<input type="radio" name="options" id="fahrenheit" autocomplete="off"> Fahrenheit
 				  </label>
 			</div>
 		<h2>Alerts</h2>
-		<label for="vibeon">
-			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+		<label for="btVibe">
+			<input type="checkbox" id="btVibe" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
 			<span>Vibrate when Bluetooth Connection is Lost.</span>
 		</label>
-		<label for="vibeon">
-			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+		<label for="btRe">
+			<input type="checkbox" id="btRe" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
 			<span>Vibrate when Bluetooth is Reestablished.</span>
 		</label>
-		<label for="vibeon">
-			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+		<label for="qtIcon">
+			<input type="checkbox" id="qtIcon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
 			<span>Show Icon when Quiet Time is active.</span>
 		</label>
 		<h2>Phone Battery Status</h2>
-		<label for="vibeon">
-			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+		<label for="battStats">
+			<input type="checkbox" id="battStats" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
 			<span>Vibrate when phone battery gets low.</span>
 		</label>
 		</br><span>How often to update battery % while discharging (updating less often saves battery) - in minutes </span></br>
@@ -166,8 +169,6 @@
 				  </label>
 			</div>
 		</br></br>
-		<input id="ex15" type="text"  />
-		<span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">10</span></span>
 		
 		<p>How often to update the phone's battery status, and while charging.</p>
 		</br></br>
@@ -188,6 +189,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 	<script src="js/pebble.js"></script>
+	
+	<script>
+      $(function(){
+        $("#geocomplete").geocomplete({
+          details: "form",
+          types: ["geocode", "establishment"],
+        });
+
+        $("#find").click(function(){
+          $("#geocomplete").trigger("geocode");
+        });
+      });
+    </script>
 	
 	
   </body>
