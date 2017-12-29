@@ -8,10 +8,33 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 	
+	<link rel="stylesheet" href="css/bootstrap-switch.css" >
+	<link rel="stylesheet" href="css/bootstrap-slider.css" >
 	
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/jqColorPicker.min.js"></script>
 	<script src="js/index.js"></script>
+	
+	<script src="js/bootstrap-switch.js"></script>
+	<script src="js/bootstrap-slider.js"></script>
+	
+	<script>
+	$(window).on('load', function(){
+		$("[type='checkbox']").bootstrapSwitch();
+		
+		$("#ex15").slider({
+			ticks: [1, 2, 5, 10, 15, 30, 60],
+			ticks_positions: [0, 10, 20, 30, 40, 65, 100],
+			ticks_labels: [1, 2, 5, 10, 15, 30, 60],
+			ticks_snap_bounds: 5
+		});
+		$("#ex15").on("slide", function(slideEvt) {
+			$("#ex6SliderVal").text(slideEvt.value);
+		});
+		
+	});
+
+	</script>
 
 	
 	<!-- Bootstrap CSS Changes -->
@@ -52,14 +75,11 @@
 
 		<h2>Time</h2>
 		<h4>Periodic Vibration</h4>
-			<div class="checkbox switcher">
-			  <label for="test">
-				<input type="checkbox" id="test" value="">
-				<span><small></small></span>
-				<span>Vibrate during quiet time.</span>
-			  </label>
-			</div>
-			<p>How often to vibrate - in minutes </p>
+		  <label for="vibeon">
+			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+			<span>Vibrate during quiet time.</span>
+		  </label>
+			</br><span>How often to vibrate - in minutes </span></br>
 			<div class="btn-group" data-toggle="buttons">
 				  <label class="btn btn-secondary btn-sm active">
 					<input type="radio" name="interval_time" value="0" autocomplete="off" checked="checked">Never
@@ -86,7 +106,6 @@
 					<input type="radio" name="interval_time" value="60" autocomplete="off">60
 				  </label>
 			</div>
-		</br></br>
 		<h2>Weather</h2>
 			<div class="form-group row">
 				<label for="location" class="col-sm-2 col-form-label">Your Location</label>
@@ -94,16 +113,7 @@
 				  <input id='location' type='text' value='Vancouver, BC' class='form-control'>
 				</div>
 			</div>
-			<div id="units" class="form-group">
-				<div class="btn-group" role="group" data-toggle="buttons">
-				  <label class="btn btn-dark" data-setting="f">
-					<input name="options" autocomplete="off" type="radio"> Fahrenheit
-				  </label>
-				  <label class="btn btn-dark active" data-setting="c">
-					<input name="options" autocomplete="off" checked="checked" type="radio"> Celsius
-				  </label>
-				</div>
-			</div>
+
 			<p>Temperature Units</p>
 			<div class="btn-group" data-toggle="buttons">
 				  <label class="btn btn-secondary active">
@@ -114,8 +124,51 @@
 				  </label>
 			</div>
 		<h2>Alerts</h2>
-		<p>Vibrate on BT disconnect, vibrate on low battery, low battery level, show quiet time icon</p>
+		<label for="vibeon">
+			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+			<span>Vibrate when Bluetooth Connection is Lost.</span>
+		</label>
+		<label for="vibeon">
+			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+			<span>Vibrate when Bluetooth is Reestablished.</span>
+		</label>
+		<label for="vibeon">
+			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+			<span>Show Icon when Quiet Time is active.</span>
+		</label>
 		<h2>Phone Battery Status</h2>
+		<label for="vibeon">
+			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+			<span>Vibrate when phone battery gets low.</span>
+		</label>
+		</br><span>How often to update battery % while discharging (updating less often saves battery) - in minutes </span></br>
+			<div class="btn-group" data-toggle="buttons">
+				  <label class="btn btn-secondary btn-sm">
+					<input type="radio" name="batt_update_time" value="1" autocomplete="off">1
+				  </label>
+				  <label class="btn btn-secondary btn-sm active" >
+					<input type="radio" name="batt_update_time" value="2" autocomplete="off" checked="checked">2
+				  </label>
+				  <label class="btn btn-secondary btn-sm">
+					<input type="radio" name="batt_update_time" value="5" autocomplete="off">5
+				  </label>
+				  <label class="btn btn-secondary btn-sm">
+					<input type="radio" name="batt_update_time" value="10" autocomplete="off">10
+				  </label>
+				  <label class="btn btn-secondary btn-sm">
+					<input type="radio" name="batt_update_time" value="15" autocomplete="off">15
+				  </label>
+				  <label class="btn btn-secondary btn-sm">
+					<input type="radio" name="batt_update_time" value="30" autocomplete="off">30
+				  </label>
+				  <label class="btn btn-secondary btn-sm">
+					<input type="radio" name="batt_update_time" value="60" autocomplete="off">60
+				  </label>
+			</div>
+		</br></br>
+		<input id="ex15" type="text"  />
+		<span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">10</span></span>
+		
 		<p>How often to update the phone's battery status, and while charging.</p>
 		</br></br>
 		<div class="row mb-5">
