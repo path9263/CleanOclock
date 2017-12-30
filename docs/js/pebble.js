@@ -14,7 +14,9 @@
     // Make a data object to be sent, coercing value types to integers
     var options = {
       'background_color': parseInt(backgroundColor.value, 16), //parseInt('4286f4', 16),
-	  'vibe_interval': parseInt(vibeInterval)
+	  'vibe_interval': parseInt(vibeInterval),
+	  'test_str': "cats!",
+	  'test_float': -122.80109400000003
       //'foreground_color': parseInt(foregroundColor.value, 16),
       //'second_ticks': secondTickCheckbox.checked == 'true' ? 1 : 0,
       //'animations': animationsCheckbox.checked == 'true' ? 1 : 0

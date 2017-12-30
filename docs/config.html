@@ -43,32 +43,24 @@
 		<h3>Configuration</h3>
 		<p class="lead">Use this page to setup CleanOClock.</p>
 		<h2>Colors</h2>
+		<div class="col">
 			<div class="form-group row">
-				<label for="background_color_input" class="col-sm-2 col-form-label">Clock Background Color</label>
-				<div class="col-sm-10">
-				  <input id='background_color_input' type='text' class="color no-alpha form-control" value="#FFFFFF" style="background-color: rgb(162, 63, 3); color: rgb(221, 221, 221);">
-				</div>
-			</div>
-<!-- 			<div class="form-group row">
-				<label for="bar_color_input" class="col-sm-2 col-form-label">Bottom Bar Background Color</label>
-				<div class="col-sm-10">
-				  <input id='bar_color_input' type='text' class="color no-alpha form-control" value="#000000" style="background-color: rgb(162, 63, 3); color: rgb(221, 221, 221);">
-				</div>
-			</div> -->
-			<div class="form-group row">
-				<label for="alert_color_input" class="col-sm-2 col-form-label">Alert Background Color</label>
-				<div class="col-sm-10">
-				  <input id='alert_color_input' type='text' class="color no-alpha form-control" value="#AA0000" style="background-color: rgb(162, 63, 3); color: rgb(221, 221, 221);">
-				</div>
+				<label for="background_color_input" class="">Clock Background Color:</label>
+				  <input id='background_color_input' type='text' class="color no-alpha form-control form-control-sm" value="#FFFFFF" style="background-color: rgb(162, 63, 3); color: rgb(221, 221, 221);">
 			</div>
 
+			<div class="form-group row">
+				<label for="alert_color_input" class="">Alert Background Color:</label>
+				  <input id='alert_color_input' type='text' class="color no-alpha form-control form-control-sm" value="#AA0000" style="background-color: rgb(162, 63, 3); color: rgb(221, 221, 221);">
+			</div>
+		</div>
 		<h2>Time</h2>
 		<h4>Periodic Vibration</h4>
 		  <label for="vibeon">
 			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
-			<span>Vibrate during quiet time.</span>
+			<span class="ml-3">Vibrate during quiet time.</span>
 		  </label>
-			</br><span>How often to vibrate - in minutes </span></br>
+			</br><span>How often to vibrate - in minutes: </span></br>
 			<div class="btn-group" data-toggle="buttons">
 				  <label class="btn btn-secondary btn-sm active">
 					<input type="radio" name="interval_time" value="0" autocomplete="off" checked="checked">Never
@@ -99,13 +91,15 @@
 			
 			<div class="form-row align-items-center mb-3">
 				<div class="col">
-					  <input type="text" class="form-control form-control-sm" id="wAPIkey" placeholder="API Key">
+					<label for="wAPIkey" class="">Leave blank to use OpenWeather:</label>
+					<input type="text" class="form-control form-control-sm" id="wAPIkey" placeholder="Weather Underground API Key">
 				  
 				</div>
 			</div>
 		
-			  
+			<label for="geocomplete" class="">Weather forecast location:</label>
 			<div class="input-group">
+				
 				<input type="text" class="form-control form-control-sm" id="geocomplete" placeholder="Type in a location">
 				<span class="input-group-btn">
 					<input id="find" type="button" value="find" class="btn btn-secondary btn-sm"/>
@@ -113,9 +107,9 @@
 			</div>
 			  
 			  <form>
-					<input name="lat" type="text" value="" class="form-control" readonly>
+					<input name="lat" type="text" value="" class="form-control form-control-sm mt-2" readonly placeholder="Lat">
 
-					<input name="lng" type="text" value="" class="form-control" readonly>
+					<input name="lng" type="text" value="" class="form-control form-control-sm mt-2" readonly placeholder="Lon">
 				</form>
 			<h4>Temperature Units</h4>
 			<div class="btn-group" data-toggle="buttons">
@@ -129,22 +123,22 @@
 		<h2>Alerts</h2>
 		<label for="btVibe">
 			<input type="checkbox" id="btVibe" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
-			<span>Vibrate when Bluetooth Connection is Lost.</span>
-		</label>
+			<span class="ml-3">Vibrate when Bluetooth Connection is Lost.</span>
+		</label></br>
 		<label for="btRe">
 			<input type="checkbox" id="btRe" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
-			<span>Vibrate when Bluetooth is Reestablished.</span>
-		</label>
+			<span class="ml-3">Vibrate when Bluetooth is Reestablished.</span>
+		</label></br>
 		<label for="qtIcon">
 			<input type="checkbox" id="qtIcon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
-			<span>Show Icon when Quiet Time is active.</span>
-		</label>
+			<span class="ml-3">Show Icon when Quiet Time is active.</span>
+		</label></br>
 		<h2>Phone Battery Status</h2>
 		<label for="battStats">
 			<input type="checkbox" id="battStats" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
-			<span>Vibrate when phone battery gets low.</span>
+			<span class="ml-3">Vibrate when phone battery gets low.</span>
 		</label>
-		</br><span>How often to update battery % while discharging (updating less often saves battery) - in minutes </span></br>
+		</br><span>How often to update battery % while discharging (updating less often saves battery) - in minutes: </span></br>
 			<div class="btn-group" data-toggle="buttons">
 				  <label class="btn btn-secondary btn-sm">
 					<input type="radio" name="batt_update_time" value="1" autocomplete="off">1
