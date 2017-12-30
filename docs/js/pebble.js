@@ -6,20 +6,29 @@
     // Get the config data from the UI elements
     var backgroundColor = document.getElementById('background_color_input');
 	backgroundColor.value = backgroundColor.value.replace('#','');
-    //var foregroundColor = document.getElementById('foreground_color_input');
-    //var secondTickCheckbox = document.getElementById('second_tick_checkbox');
-    //var animationsCheckbox = document.getElementById('animations_checkbox');
 	var vibeInterval = $('input[name="interval_time"]:checked').val();
+	var batt_update_time = $('input[name="batt_update_time"]:checked').val();
+	var chrg_update_time = $('input[name="chrg_update_time"]:checked').val();
+	var wAPIkey = document.getElementById('wAPIkey');
+	var lat = document.getElementById('lat');
+	var lon = document.getElementById('lon');
+	var vibeOn = (document.getElementById("vibeOn").checked) ? 1 : 0;
+	var showWeather = (document.getElementById("showWeather").checked) ? 1 : 0;
+	var tempUnitC = (document.getElementById("celsius").checked) ? 1 : 0;
+	var btVibe = (document.getElementById("btVibe").checked) ? 1 : 0;
+	var btRe = (document.getElementById("btRe").checked) ? 1 : 0;
+	var qtIcon = (document.getElementById("qtIcon").checked) ? 1 : 0;
+	var battStats = (document.getElementById("battStats").checked) ? 1 : 0;
 
     // Make a data object to be sent, coercing value types to integers
     var options = {
       'background_color': parseInt(backgroundColor.value, 16), //parseInt('4286f4', 16),
 	  'vibe_interval': parseInt(vibeInterval),
-	  'test_str': "cats!",
-	  'test_float': [-122.80109400000003, 1.23456]
-      //'foreground_color': parseInt(foregroundColor.value, 16),
-      //'second_ticks': secondTickCheckbox.checked == 'true' ? 1 : 0,
-      //'animations': animationsCheckbox.checked == 'true' ? 1 : 0
+	  'batt_update_time': parseInt(batt_update_time),
+	  'chrg_update_time': parseInt(chrg_update_time),
+	  'wAPIkey': String(wAPIkey),
+	  'gps': [parseFloat(lat), parseFloat(lon)],
+	  'toggles': [vibeOn, showWeather, tempUnitC, btVibe, btRe, qtIcon, battStats]
     };
 
     // Determine the correct return URL (emulator vs real watch)

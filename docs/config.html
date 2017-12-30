@@ -48,16 +48,17 @@
 				<label for="background_color_input" class="">Clock Background Color:</label>
 				  <input id='background_color_input' type='text' class="color no-alpha form-control form-control-sm" value="#FFFFFF" style="background-color: rgb(162, 63, 3); color: rgb(221, 221, 221);">
 			</div>
-
+			<!--
 			<div class="form-group row">
 				<label for="alert_color_input" class="">Alert Background Color:</label>
 				  <input id='alert_color_input' type='text' class="color no-alpha form-control form-control-sm" value="#AA0000" style="background-color: rgb(162, 63, 3); color: rgb(221, 221, 221);">
 			</div>
+			-->
 		</div>
 		<h2>Time</h2>
 		<h4>Periodic Vibration</h4>
-		  <label for="vibeon">
-			<input type="checkbox" id="vibeon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+		  <label for="vibeOn">
+			<input type="checkbox" id="vibeOn" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
 			<span class="ml-3">Vibrate during quiet time.</span>
 		  </label>
 			</br><span>How often to vibrate - in minutes: </span></br>
@@ -88,6 +89,10 @@
 				  </label>
 			</div>
 		<h2>Weather</h2>
+			<label for="showWeather">
+				<input type="checkbox" id="showWeather" value="" data-size="mini" data-on-color="secondary" data-off-color="danger" checked>
+				<span class="ml-3">Show Weather on Watch.</span>
+			</label></br>
 			
 			<div class="form-row align-items-center mb-3">
 				<div class="col">
@@ -107,9 +112,9 @@
 			</div>
 			  
 			  <form>
-					<input name="lat" type="text" value="" class="form-control form-control-sm mt-2" readonly placeholder="Lat">
+					<input id="lat" type="text" value="" class="form-control form-control-sm mt-2" readonly placeholder="Lat">
 
-					<input name="lng" type="text" value="" class="form-control form-control-sm mt-2" readonly placeholder="Lon">
+					<input id="lon" type="text" value="" class="form-control form-control-sm mt-2" readonly placeholder="Lon">
 				</form>
 			<h4>Temperature Units</h4>
 			<div class="btn-group" data-toggle="buttons">
@@ -122,50 +127,55 @@
 			</div>
 		<h2>Alerts</h2>
 		<label for="btVibe">
-			<input type="checkbox" id="btVibe" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+			<input type="checkbox" id="btVibe" value="" data-size="mini" data-on-color="secondary" data-off-color="danger" checked>
 			<span class="ml-3">Vibrate when Bluetooth Connection is Lost.</span>
 		</label></br>
 		<label for="btRe">
-			<input type="checkbox" id="btRe" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+			<input type="checkbox" id="btRe" value="" data-size="mini" data-on-color="secondary" data-off-color="danger" checked>
 			<span class="ml-3">Vibrate when Bluetooth is Reestablished.</span>
 		</label></br>
 		<label for="qtIcon">
-			<input type="checkbox" id="qtIcon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+			<input type="checkbox" id="qtIcon" value="" data-size="mini" data-on-color="secondary" data-off-color="danger" checked>
 			<span class="ml-3">Show Icon when Quiet Time is active.</span>
 		</label></br>
 		<h2>Phone Battery Status</h2>
 		<label for="battStats">
-			<input type="checkbox" id="battStats" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
+			<input type="checkbox" id="battStats" value="" data-size="mini" data-on-color="secondary" data-off-color="danger" checked>
 			<span class="ml-3">Vibrate when phone battery gets low.</span>
 		</label>
-		</br><span>How often to update battery % while discharging (updating less often saves battery) - in minutes: </span></br>
+		</br><span>While <strong>discharging</strong>, update phone's battery status every x percent. <br>(updating less often saves battery): </span></br>
 			<div class="btn-group" data-toggle="buttons">
 				  <label class="btn btn-secondary btn-sm">
-					<input type="radio" name="batt_update_time" value="1" autocomplete="off">1
+					<input type="radio" name="batt_update_time" value="1" autocomplete="off">1%
 				  </label>
 				  <label class="btn btn-secondary btn-sm active" >
-					<input type="radio" name="batt_update_time" value="2" autocomplete="off" checked="checked">2
+					<input type="radio" name="batt_update_time" value="2" autocomplete="off" checked="checked">2%
 				  </label>
 				  <label class="btn btn-secondary btn-sm">
-					<input type="radio" name="batt_update_time" value="5" autocomplete="off">5
+					<input type="radio" name="batt_update_time" value="5" autocomplete="off">5%
 				  </label>
 				  <label class="btn btn-secondary btn-sm">
-					<input type="radio" name="batt_update_time" value="10" autocomplete="off">10
-				  </label>
-				  <label class="btn btn-secondary btn-sm">
-					<input type="radio" name="batt_update_time" value="15" autocomplete="off">15
-				  </label>
-				  <label class="btn btn-secondary btn-sm">
-					<input type="radio" name="batt_update_time" value="30" autocomplete="off">30
-				  </label>
-				  <label class="btn btn-secondary btn-sm">
-					<input type="radio" name="batt_update_time" value="60" autocomplete="off">60
+					<input type="radio" name="batt_update_time" value="10" autocomplete="off">10%
 				  </label>
 			</div>
 		</br></br>
-		
-		<p>How often to update the phone's battery status, and while charging.</p>
+		<span>While <strong>charging</strong>, update phone's battery status every x percent: </span></br>
+			<div class="btn-group" data-toggle="buttons">
+				  <label class="btn btn-secondary btn-sm">
+					<input type="radio" name="chrg_update_time" value="1" autocomplete="off">1%
+				  </label>
+				  <label class="btn btn-secondary btn-sm" >
+					<input type="radio" name="chrg_update_time" value="2" autocomplete="off" >2%
+				  </label>
+				  <label class="btn btn-secondary btn-sm active">
+					<input type="radio" name="chrg_update_time" value="5" autocomplete="off" checked="checked">5%
+				  </label>
+				  <label class="btn btn-secondary btn-sm">
+					<input type="radio" name="chrg_update_time" value="10" autocomplete="off">10%
+				  </label>
+			</div>
 		</br></br>
+
 		<div class="row mb-5">
 			<div class="col-sm align-self-center">
 				<div class="alert alert-danger" role="alert">
