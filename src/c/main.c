@@ -125,8 +125,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
        update_date(); 
   }
   // periodic vibration
-  //if((tick_time->tm_min % settings.vibeInterval == 0) && !quiet_time_is_active()) {
-  if((tick_time->tm_min % 5 == 0) && !quiet_time_is_active()) {
+  if((tick_time->tm_min % settings.vibeInterval == 0) && !quiet_time_is_active()) {
     if(tick_time->tm_min != s_last_vibe){   //fixes multiple vibrations during intended minute
       vibes_short_pulse();
     }
@@ -394,14 +393,15 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   Tuple *battStats_tuple = dict_find(iterator, MESSAGE_KEY_BATTSTATS);
   
   Tuple *bg_color_tuple = dict_find(iterator, MESSAGE_KEY_BGCOLOR);
-  Tuple *vibeInterval_tuple = dict_find(iterator, MESSAGE_KEY_VIBEINTERVAL);
+  Tuple *vibeInterval_tuple = dict_find(iterator, MESSAGE_KEY_INTERVALS);
   
   if(bg_color_tuple && vibeInterval_tuple) {
-    APP_LOG(APP_LOG_LEVEL_INFO, "Vibe Interval: %d", vibeInterval_tuple->value->int32);
+    APP_LOG(APP_LOG_LEVEL_INFO, "Vibe Interval: %d", vibeInterval_tuple->value);
     bg_color = GColorFromHEX(bg_color_tuple->value->int32);
     
     settings.BackgroundColor = GColorFromHEX(bg_color_tuple->value->int32);
-    settings.vibeInterval = vibeInterval_tuple->value->int8;
+    //settings.vibeInterval = vibeInterval_tuple->value->int8;
+    settings.vibeInterval = 60;
     
     layer_mark_dirty(s_canvas_layer);
     prv_save_settings();

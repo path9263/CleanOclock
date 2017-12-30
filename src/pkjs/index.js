@@ -1,8 +1,7 @@
-// More info here on JS battery info: https://googlechrome.github.io/samples/battery-status/
 /*jshint esversion: 6 */
 
 
-
+///////////////////////////////////////  -- CONFIG SETTINGS --  ////////////////////////////////////////////////////////////////////////
 // Get settings from the config page
 Pebble.addEventListener('webviewclosed', 
   function(e) {
@@ -10,13 +9,13 @@ Pebble.addEventListener('webviewclosed',
   var configData = JSON.parse(decodeURIComponent(e.response));
   
   // Send to the watchapp via AppMessage
-    console.log("vibe_interval from index.js: " + configData.vibe_interval);
+    //console.log("test_str from pebble.js: " + configData.test_str);
   var dict = {
     'BGCOLOR': configData.background_color,
-    'VIBEINTERVAL' : configData.vibe_interval
-    //'ForegroundColor': configData.foreground_color,
-    //'SecondTick': configData.second_ticks,
-    //'Animations': configData.animations
+    'INTERVALS' : [configData.vibe_interval, configData.batt_update_time, configData.chrg_update_time],
+    'GPS' : [configData.gps[0], configData.gps[1]],
+    'WAPIKEY' : configData.wAPIkey,
+    'TOGGLES' : [configData.toggles[0], configData.toggles[1], configData.toggles[2], configData.toggles[3], configData.toggles[4], configData.toggles[5], configData.toggles[6]]
   };
   
   // Send to the watchapp
@@ -27,7 +26,8 @@ Pebble.addEventListener('webviewclosed',
     });
 });
 
-
+///////////////////////////////////////  -- BATT LEVEL --  ////////////////////////////////////////////////////////////////////////
+// More info here on JS battery info: https://googlechrome.github.io/samples/battery-status/
 // New phone battery level checker, based on listener on phone:
 function updateBattery(battery, forceUpdate) {
   var dictionary = {
