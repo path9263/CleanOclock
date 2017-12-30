@@ -14,10 +14,16 @@
             "BATTLVL",
             "BATTSTATS",
             "BGCOLOR",
-            "INTERVALS[3]",
-            "GPS[2]",
-            "WAPIKEY",
-            "TOGGLES[7]"
+            "vibeInterval",
+            "battUpdateTime",
+            "chrgUpdateTime",
+            "vibeOn",
+            "showWeather",
+            "tempUnitC",
+            "btVibe",
+            "btRe",
+            "qtIcon",
+            "vibeBattLow"
         ],
         "projectType": "native",
         "resources": {

@@ -393,10 +393,10 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   Tuple *battStats_tuple = dict_find(iterator, MESSAGE_KEY_BATTSTATS);
   
   Tuple *bg_color_tuple = dict_find(iterator, MESSAGE_KEY_BGCOLOR);
-  Tuple *vibeInterval_tuple = dict_find(iterator, MESSAGE_KEY_INTERVALS);
+  Tuple *vibeInterval_tuple = dict_find(iterator, MESSAGE_KEY_vibeInterval);
   
   if(bg_color_tuple && vibeInterval_tuple) {
-    APP_LOG(APP_LOG_LEVEL_INFO, "Vibe Interval: %d", vibeInterval_tuple->value);
+    APP_LOG(APP_LOG_LEVEL_INFO, "Vibe Interval: %d", vibeInterval_tuple->value->int32);
     bg_color = GColorFromHEX(bg_color_tuple->value->int32);
     
     settings.BackgroundColor = GColorFromHEX(bg_color_tuple->value->int32);

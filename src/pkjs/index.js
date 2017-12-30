@@ -12,10 +12,16 @@ Pebble.addEventListener('webviewclosed',
     //console.log("test_str from pebble.js: " + configData.test_str);
   var dict = {
     'BGCOLOR': configData.background_color,
-    'INTERVALS' : [configData.vibe_interval, configData.batt_update_time, configData.chrg_update_time],
-    'GPS' : [configData.gps[0], configData.gps[1]],
-    'WAPIKEY' : configData.wAPIkey,
-    'TOGGLES' : [configData.toggles[0], configData.toggles[1], configData.toggles[2], configData.toggles[3], configData.toggles[4], configData.toggles[5], configData.toggles[6]]
+    'vibeInterval': configData.vibeInterval,
+    'battUpdateTime': configData.battUpdateTime,
+    'chrgUpdateTime': configData.chrgUpdateTime,
+    'vibeOn': configData.vibeOn,
+    'showWeather': configData.showWeather,
+    'tempUnitC': configData.tempUnitC,
+    'btVibe': configData.btVibe,
+    'btRe': configData.btRe,
+    'qtIcon': configData.qtIcon,
+    'vibeBattLow': configData.vibeBattLow
   };
   
   // Send to the watchapp
