@@ -5,6 +5,7 @@
     "name": "cleanoclock",
     "pebble": {
         "capabilities": [
+            "location",
             "configurable"
         ],
         "displayName": "CleanOclock",
@@ -13,70 +14,18 @@
             "BATTLVL",
             "BATTSTATS",
             "BGCOLOR",
-            "VIBEINTERVAL"
+            "INTERVALS[3]",
+            "GPS[2]",
+            "WAPIKEY",
+            "TOGGLES[7]"
         ],
         "projectType": "native",
         "resources": {
             "media": [
                 {
-                    "characterRegex": "[0-9 ]",
-                    "file": "fonts/square.ttf",
-                    "name": "FORCED_SQUARE_94",
-                    "targetPlatforms": null,
-                    "type": "font"
-                },
-                {
-                    "file": "images/logo.png",
-                    "memoryFormat": "SmallestPalette",
-                    "menuIcon": true,
-                    "name": "IMAGE_MENU_ICON",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/plugIcon.png",
-                    "memoryFormat": "SmallestPalette",
-                    "name": "IMAGE_PLUG_ICON",
-                    "storageFormat": "png",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
                     "file": "images/watchIcon.png",
                     "memoryFormat": "SmallestPalette",
                     "name": "IMAGE_WATCH_ICON",
-                    "storageFormat": "png",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/phoneIcon.png",
-                    "memoryFormat": "SmallestPalette",
-                    "name": "IMAGE_PHONE_ICON",
-                    "storageFormat": "png",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "characterRegex": "[0-9 ]",
-                    "file": "fonts/Montserrat.ttf",
-                    "name": "MONTSERRAT_BOLD_68",
-                    "targetPlatforms": null,
-                    "trackingAdjust": 1,
-                    "type": "font"
-                },
-                {
-                    "file": "images/battIcon.png",
-                    "memoryFormat": "SmallestPalette",
-                    "name": "IMAGE_BATT_ICON",
-                    "storageFormat": "png",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/btIcon.png",
-                    "memoryFormat": "SmallestPalette",
-                    "name": "IMAGE_BT_ICON",
                     "storageFormat": "png",
                     "targetPlatforms": null,
                     "type": "bitmap"
@@ -90,10 +39,65 @@
                     "type": "bitmap"
                 },
                 {
+                    "file": "images/plugIcon.png",
+                    "memoryFormat": "SmallestPalette",
+                    "name": "IMAGE_PLUG_ICON",
+                    "storageFormat": "png",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/phoneIcon.png",
+                    "memoryFormat": "SmallestPalette",
+                    "name": "IMAGE_PHONE_ICON",
+                    "storageFormat": "png",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/logo.png",
+                    "memoryFormat": "SmallestPalette",
+                    "menuIcon": true,
+                    "name": "IMAGE_MENU_ICON",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/btIcon.png",
+                    "memoryFormat": "SmallestPalette",
+                    "name": "IMAGE_BT_ICON",
+                    "storageFormat": "png",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/battIcon.png",
+                    "memoryFormat": "SmallestPalette",
+                    "name": "IMAGE_BATT_ICON",
+                    "storageFormat": "png",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "characterRegex": "[0-9 ]",
+                    "file": "fonts/square.ttf",
+                    "name": "FORCED_SQUARE_94",
+                    "targetPlatforms": null,
+                    "type": "font"
+                },
+                {
                     "characterRegex": "[0-9 ]",
                     "file": "fonts/consolas.ttf",
                     "name": "CONSOLAS_BOLD_70",
                     "targetPlatforms": null,
+                    "type": "font"
+                },
+                {
+                    "characterRegex": "[0-9 ]",
+                    "file": "fonts/Montserrat.ttf",
+                    "name": "MONTSERRAT_BOLD_68",
+                    "targetPlatforms": null,
+                    "trackingAdjust": 1,
                     "type": "font"
                 }
             ]
