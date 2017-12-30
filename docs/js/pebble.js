@@ -16,7 +16,7 @@
       'background_color': parseInt(backgroundColor.value, 16), //parseInt('4286f4', 16),
 	  'vibe_interval': parseInt(vibeInterval),
 	  'test_str': "cats!",
-	  'test_float': -122.80109400000003
+	  'test_float': [-122.80109400000003, 1.23456]
       //'foreground_color': parseInt(foregroundColor.value, 16),
       //'second_ticks': secondTickCheckbox.checked == 'true' ? 1 : 0,
       //'animations': animationsCheckbox.checked == 'true' ? 1 : 0
