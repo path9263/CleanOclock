@@ -7,8 +7,8 @@
     var backgroundColor = document.getElementById('background_color_input');
 	backgroundColor.value = backgroundColor.value.replace('#','');
 	var vibeInterval = $('input[name="interval_time"]:checked').val();
-	var batt_update_time = $('input[name="batt_update_time"]:checked').val();
-	var chrg_update_time = $('input[name="chrg_update_time"]:checked').val();
+	var battUpdateTime = $('input[name="batt_update_time"]:checked').val();
+	var chrgUpdateTime = $('input[name="chrg_update_time"]:checked').val();
 	var wAPIkey = document.getElementById('wAPIkey');
 	var lat = document.getElementById('lat');
 	var lon = document.getElementById('lon');
@@ -18,17 +18,25 @@
 	var btVibe = (document.getElementById("btVibe").checked) ? 1 : 0;
 	var btRe = (document.getElementById("btRe").checked) ? 1 : 0;
 	var qtIcon = (document.getElementById("qtIcon").checked) ? 1 : 0;
-	var battStats = (document.getElementById("battStats").checked) ? 1 : 0;
+	var vibeBattLow = (document.getElementById("battStats").checked) ? 1 : 0;
 
     // Make a data object to be sent, coercing value types to integers
     var options = {
       'background_color': parseInt(backgroundColor.value, 16), //parseInt('4286f4', 16),
-	  'vibe_interval': parseInt(vibeInterval),
-	  'batt_update_time': parseInt(batt_update_time),
-	  'chrg_update_time': parseInt(chrg_update_time),
+	  'vibeInterval': parseInt(vibeInterval),
+	  'battUpdateTime': parseInt(battUpdateTime),
+	  'chrgUpdateTime': parseInt(chrgUpdateTime),
 	  'wAPIkey': String(wAPIkey),
-	  'gps': [parseFloat(lat), parseFloat(lon)],
-	  'toggles': [vibeOn, showWeather, tempUnitC, btVibe, btRe, qtIcon, battStats]
+	  'gpsLat': parseFloat(lat),
+	  'gpsLon': parseFloat(lon),
+	  'vibeOn': vibeOn,
+	  'showWeather': showWeather,
+	  'tempUnitC': tempUnitC,
+	  'btVibe': btVibe,
+	  'btRe': btRe,
+	  'qtIcon': qtIcon,
+	  'vibeBattLow': vibeBattLow
+	  
     };
 
     // Determine the correct return URL (emulator vs real watch)
