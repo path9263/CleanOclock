@@ -10,6 +10,7 @@
 	var battUpdateTime = $('input[name="batt_update_time"]:checked').val();
 	var chrgUpdateTime = $('input[name="chrg_update_time"]:checked').val();
 	var wAPIkey = document.getElementById('wAPIkey');
+	var useGPS = (document.getElementById("useGPS").checked) ? 1 : 0;
 	var lat = document.getElementById('lat');
 	var lon = document.getElementById('lon');
 	var vibeOn = (document.getElementById("vibeOn").checked) ? 1 : 0;
@@ -19,6 +20,8 @@
 	var btRe = (document.getElementById("btRe").checked) ? 1 : 0;
 	var qtIcon = (document.getElementById("qtIcon").checked) ? 1 : 0;
 	var vibeBattLow = (document.getElementById("battStats").checked) ? 1 : 0;
+	
+	//console.log('vibeOn: ' + vibeOn);
 
     // Make a data object to be sent, coercing value types to integers
     var options = {
@@ -27,9 +30,10 @@
 	  'battUpdateTime': parseInt(battUpdateTime),
 	  'chrgUpdateTime': parseInt(chrgUpdateTime),
 	  'wAPIkey': String(wAPIkey),
+	  'useGPS': useGPS,
 	  'gpsLat': parseFloat(lat),
 	  'gpsLon': parseFloat(lon),
-	  'vibeOn': vibeOn,
+	  'vibeOn': vibeOn, //allow periodic during qt
 	  'showWeather': showWeather,
 	  'tempUnitC': tempUnitC,
 	  'btVibe': btVibe,

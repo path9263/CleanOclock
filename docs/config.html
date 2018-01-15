@@ -39,7 +39,7 @@
 			CleanOClock
 		</a>
 	</nav>
-	<div class="container mt-3">
+	<div class="container mt-3 mb-5">
 		<h3>Configuration</h3>
 		<p class="lead">Use this page to setup CleanOClock.</p>
 		<h2>Colors</h2>
@@ -56,10 +56,11 @@
 			-->
 		</div>
 		<h2>Time</h2>
+		<p>To change 24/12hr format use the settings menu on your Pebble.</p>
 		<h4>Periodic Vibration</h4>
 		  <label for="vibeOn">
 			<input type="checkbox" id="vibeOn" value="" data-size="mini" data-on-color="secondary" data-off-color="danger">
-			<span class="ml-3">Vibrate during quiet time.</span>
+			<span class="ml-3">Allow periodic vibration during quiet time.</span>
 		  </label>
 			</br><span>How often to vibrate - in minutes: </span></br>
 			<div class="btn-group" data-toggle="buttons">
@@ -101,21 +102,28 @@
 				  
 				</div>
 			</div>
-		
-			<label for="geocomplete" class="">Weather forecast location:</label>
-			<div class="input-group">
-				
-				<input type="text" class="form-control form-control-sm" id="geocomplete" placeholder="Type in a location">
-				<span class="input-group-btn">
-					<input id="find" type="button" value="find" class="btn btn-secondary btn-sm"/>
-				</span> 
-			</div>
-			  
-			  <form>
-					<input id="lat" type="text" value="" class="form-control form-control-sm mt-2" readonly placeholder="Lat">
+			
+			
+			<label for="useGPS">
+				<input type="checkbox" id="useGPS" value="" data-size="mini" data-on-color="secondary" data-off-color="danger" >
+				<span class="ml-3">Use GPS for location.</span>
+			</label></br>
+			<div id="GPSform">	
+				<label for="geocomplete" class="">Weather forecast location:</label>
+				<div class="input-group" >
+					
+					<input type="text" class="form-control form-control-sm" id="geocomplete" placeholder="Type in a location">
+					<span class="input-group-btn">
+						<input id="find" type="button" value="find" class="btn btn-secondary btn-sm"/>
+					</span> 
+				</div>
+				  
+				  <form>
+						<input id="lat" type="text" value="" class="form-control form-control-sm mt-2" readonly placeholder="Lat">
 
-					<input id="lon" type="text" value="" class="form-control form-control-sm mt-2" readonly placeholder="Lon">
-				</form>
+						<input id="lon" type="text" value="" class="form-control form-control-sm mt-2" readonly placeholder="Lon">
+					</form>
+			</div>
 			<h4>Temperature Units</h4>
 			<div class="btn-group" data-toggle="buttons">
 				  <label class="btn btn-secondary active btn-sm">
@@ -141,7 +149,7 @@
 		<h2>Phone Battery Status</h2>
 		<label for="battStats">
 			<input type="checkbox" id="battStats" value="" data-size="mini" data-on-color="secondary" data-off-color="danger" checked>
-			<span class="ml-3">Vibrate when phone battery gets low.</span>
+			<span class="ml-3">Vibrate when phone battery gets low (20% and 10%).</span>
 		</label>
 		</br><span>While <strong>discharging</strong>, update phone's battery status every x percent. <br>(updating less often saves battery): </span></br>
 			<div class="btn-group" data-toggle="buttons">
@@ -176,17 +184,14 @@
 			</div>
 		</br></br>
 
-		<div class="row mb-5">
-			<div class="col-sm align-self-center">
-				<div class="alert alert-danger" role="alert">
-				  Don't forget to save your settings!
-				</div>
-			  <input id='submit_button' class="btn btn-info" type='button' value='Save Settings'>
-			</div>
-		</div>
+		
 		
 		
 	 </div>
+	 
+	<nav class="navbar fixed-bottom navbar-dark bg-dark">
+		  <input id='submit_button' class="btn btn-warning btn-block" type='button' value='Save Settings'>
+	</nav>
 
     <!-- Optional JavaScript -->  
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -205,6 +210,13 @@
           $("#geocomplete").trigger("geocode");
         });
       });
+	  
+		$(document).ready(function() {
+			$('input[id="useGPS"]').on('switchChange.bootstrapSwitch', function(event, state) {
+			  console.log(state); // true | false
+			  $("#GPSform").slideToggle();
+			});
+		});
     </script>
 	
 	
